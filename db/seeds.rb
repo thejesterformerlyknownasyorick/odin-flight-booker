@@ -29,7 +29,7 @@ def airport_randomizer(airport = nil)
     if second_airport == airport
         airport_randomizer(airport)
     else
-        return second_airport
+        return second_airport.id
     end
 end
 
