@@ -1,0 +1,1 @@
+Mock-up of a flight booking website, designed per instructions found at https://www.theodinproject.com/lessons/ruby-on-rails-flight-booker
