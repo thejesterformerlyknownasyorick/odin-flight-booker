@@ -1,8 +1,27 @@
-<%= form_tag(url: "/flights", method: :get) do %>
+<%= form_tag(flights_path, method: "get") do %>
     <%= label_tag "From:" %>
     <%= select_tag(:depature_id, options_for_select(@flight_options, params[:departure_id])) %><br><br>
     <%= label_tag "To:" %>
     <%= select_tag(:arrival_id, options_for_select(@flight_options, params[:arrival_id])) %><br><br>
+    <%= label_tag "Number of passengers:" %>
+    <%= select_tag(:num_passengers, options_for_select(@num_options, params[:num_passengers])) %><br><br>
     <%= label_tag "Date:" %>
-    <%= select_tag(:departure_time, options_for_select(Flight.pluck(:departure_time).map { |a| [a.strftime("%m/%d/%Y at %I:%M %p"), a.to_date]}.uniq)) %>
+    <%= select_tag(:departure_time, options_for_select(Flight.pluck(:departure_time).map { |a| [a.strftime("%m/%d/%Y"), a.to_date]}.uniq)) %><br><br><br>
+    <%= submit_tag "Search" %>
+<% end %>
+
+<% if @flight_search_results.empty? %>
+    <p>No flights match that criteria... apparently.</p>
+<% else %>
+    <span>Available flights:</span>
+
+    <%= @flight_search_results.each do |flight| %>
+        <%= hidden_field_tag :num_passengers, params[:num_passengers] %>
+        <%= radio_button_tag(:flight_id, "#{flight.id}", :required => true) %>
+        <%= label_tag("flight_id_#{flight.id}", "#{flight.departure_id.code}") %> |
+        <%= label_tag("flight_id_#{flight.id}", "#{flight.arrival_id.code}") %> |
+        <%= label_tag("flight_id_#{flight.id}", "Departure date: #{flight.searchrable_date}") %> |
+        <%= label_tag("flight_id_#{flight.id}", "Duration: #{flight.flight_duration} minutes") %> |
+    <% end %>
+    <%= submit_tag "Book this flight" %>
 <% end %>

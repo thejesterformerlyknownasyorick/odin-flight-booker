@@ -16,7 +16,7 @@ airport = Airport.create([
     { code: "ATL" },
     { code: "DEN" },
     { code: "ORD" },
-    { code: "ORD" },
+    { code: "ONT" },
     { code: "LAX" },
     { code: "CLT" },
     { code: "SDO" },
