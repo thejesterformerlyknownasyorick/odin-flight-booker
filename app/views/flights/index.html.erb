@@ -1,0 +1,8 @@
+<%= form_tag(url: "/flights", method: :get) do %>
+    <%= label_tag "From:" %>
+    <%= select_tag(:depature_id, options_for_select(@flight_options, params[:departure_id])) %><br><br>
+    <%= label_tag "To:" %>
+    <%= select_tag(:arrival_id, options_for_select(@flight_options, params[:arrival_id])) %><br><br>
+    <%= label_tag "Date:" %>
+    <%= select_tag(:departure_time, options_for_select(Flight.pluck(:departure_time).map { |a| [a.strftime("%m/%d/%Y at %I:%M %p"), a.to_date]}.uniq)) %>
+<% end %>

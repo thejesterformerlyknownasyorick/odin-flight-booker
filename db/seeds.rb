@@ -24,20 +24,21 @@ airport = Airport.create([
     { code: "JFK" }
 ])
 
-def airport_randomizer(airport = nil)
-    second_airport = Airport.all[rand(Airport.all.count)]
-    if second_airport == airport
-        airport_randomizer(airport)
-    else
-        return second_airport.id
+72.times do |x|
+    10.times do |y|
+        10.times do |n|
+            flight = Flight.new
+            airport1 = Airport.find(n+1)
+            airport2 = Airport.find(y+1)
+            flight.departure_id = airport1.id
+            flight.arrival_id = airport2.id
+            if airport1.id == airport2.id
+                flight.destroy
+            else
+                flight.departure_time = Time.now + x.hours
+                flight.flight_duration = rand(60..600)
+                flight.save
+            end
+        end
     end
-end
-
-100.times do |i|
-    flight = Flight.new
-    flight.departure_id = airport_randomizer
-    flight.arrival_id = airport_randomizer(flight.departure_id)
-    flight.departure_time = Time.now + rand(525600).minutes
-    flight.flight_duration = rand(60..600)
-    flight.save
 end
