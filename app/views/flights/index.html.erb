@@ -17,13 +17,15 @@
 <% else %>
     <p>Available flight(s):</p>
 
-    <% @flight_search_results.each do |flight| %>
+    <%= form_tag new_booking_path, method: :get do %>
         <%= hidden_field_tag :num_passengers, params[:num_passengers] %>
-        <%= radio_button_tag(:flight_id, "#{flight.id}", :required => true) %>
-        <%= label_tag("flight_id_#{flight.id}", "#{flight.departure_airport.code}") %> to 
-        <%= label_tag("flight_id_#{flight.id}", "#{flight.arrival_airport.code}") %> |
-        <%= label_tag("flight_id_#{flight.id}", "Departure date: #{flight.searchable_date}") %> |
-        <%= label_tag("flight_id_#{flight.id}", "Duration: #{flight.flight_duration} minutes") %> |<br><br>
+        <% @flight_search_results.each do |flight| %>
+            <%= radio_button_tag(:flight_id, "#{flight.id}", :required => true) %>
+            <%= label_tag("flight_id_#{flight.id}", "#{flight.departure_airport.code}") %> to 
+            <%= label_tag("flight_id_#{flight.id}", "#{flight.arrival_airport.code}") %> |
+            <%= label_tag("flight_id_#{flight.id}", "Departure date: #{flight.searchable_date}") %> |
+            <%= label_tag("flight_id_#{flight.id}", "Duration: #{flight.flight_duration} minutes") %> |<br><br>
+        <% end %>
+        <%= submit_tag "Book this!" %>
     <% end %>
-    <%= submit_tag "Book this!" %>
 <% end %>
