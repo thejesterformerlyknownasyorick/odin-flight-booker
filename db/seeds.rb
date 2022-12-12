@@ -24,7 +24,7 @@ airport = Airport.create([
     { code: "JFK" }
 ])
 
-72.times do |x|
+14.times do |x|
     10.times do |y|
         10.times do |n|
             flight = Flight.new
@@ -35,7 +35,7 @@ airport = Airport.create([
             if airport1.id == airport2.id
                 flight.destroy
             else
-                flight.departure_time = Time.now + x.hours
+                flight.date = Date.today + x.days
                 flight.flight_duration = rand(60..600)
                 flight.save
             end
