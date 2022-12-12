@@ -1,12 +1,12 @@
 <%= form_tag(flights_path, method: "get") do %>
     <%= label_tag "From:" %>
-    <%= select_tag(:departure_id, options_for_select(@flight_options, params[:departure_id])) %><br><br>
+    <%= select_tag(:departure_id, options_for_select(@flight_options.sort, params[:departure_id])) %><br><br>
     <%= label_tag "To:" %>
-    <%= select_tag(:arrival_id, options_for_select(@flight_options, params[:arrival_id])) %><br><br>
+    <%= select_tag(:arrival_id, options_for_select(@flight_options.sort, params[:arrival_id])) %><br><br>
     <%= label_tag "Number of passengers:" %>
     <%= select_tag(:num_passengers, options_for_select(@num_options, params[:num_passengers])) %><br><br>
     <%= label_tag "Date:" %>
-    <%= select_tag(:date, options_for_select(@flight_time_options, params[:date])) %><br><br><br>
+    <%= select_tag(:date, options_for_select(@flight_time_options.sort, params[:date])) %><br><br><br>
     <%= submit_tag "Search" %>
 <% end %>
 
