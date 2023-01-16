@@ -1,0 +1,7 @@
+Ticket confirmation for <%= @passenger.name %>
+===================================================
+
+You have successfully booked a flight from <%= Airport.find(@booking.flight.departure_id).code %> to <%= Airport.find(@booking.flight.arrival_id).code %>
+on <%= @booking.flight.date %>.
+
+You cannot respond to this e-mail. This also isn't a real flight.

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    </head>
+    <body>
+        <h1>Congratulations <%= @passenger.name %>! Your booking was successful.</h1>
+        <p>
+            You have successfully booked the flight from <%= Airport.find(@booking.flight.departure_id).code %>
+            to <%= Airport.find(@booking.flight.arrival_id).code %> on <%= @booking.flight.date %>
+        </p>
+    </body>
+</html>

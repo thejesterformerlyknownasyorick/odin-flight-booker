@@ -73,3 +73,6 @@ end
 
 # Reset ID sequencing when re-seeding db [https://github.com/splendeo/activerecord-reset-pk-sequence]
 gem 'activerecord-reset-pk-sequence'
+
+# Letter Opener for mailer testing [https://github.com/ryanb/letter_opener]
+gem "letter_opener", group: :development

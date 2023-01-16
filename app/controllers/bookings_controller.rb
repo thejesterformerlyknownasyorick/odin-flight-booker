@@ -16,6 +16,9 @@ class BookingsController < ApplicationController
         @booking = Booking.new(booking_params)
 
         if @booking.save
+            Passenger.where("booking_id = ?", @booking.id).each do |passenger|
+                PassengerMailer.with(id: passenger.id, booking_id: @booking.id, flight_id: @booking.flight_id).confirmation_email.deliver_now!
+            end
             redirect_to @booking
         else
             render 'new'
@@ -29,6 +32,6 @@ class BookingsController < ApplicationController
     private
 
     def booking_params
-        params.require(:booking).permit(:flight_id)
+        params.require(:booking).permit(:flight_id, passengers_attributes: [:id, :name, :email])
     end
 end
